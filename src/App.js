@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
+import { getUserFromLocalStorage } from './actions/userActions'
+import { connect } from 'react-redux'
+import LoginSignupPage from './components/LoginSignupPage'
+import Profile from './components/Profile'
+import Composition from './components/Composition.js'
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+    let token = localStorage.token;
+    this.props.getUserFromLocalStorage(token)
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {this.props.user ?
+          <Redirect to='/login' /> :
+          <Switch>
+            <Route path='/login' component={LoginSignupPage} />
+            <Route path='/signup' component={LoginSignupPage} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/composition' component={Composition} />
+          </Switch>}
       </div>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  getUserFromLocalStorage: (token) => dispatch(getUserFromLocalStorage(token))
+})
+
+export default withRouter(connect(null, mapDispatchToProps)(App))

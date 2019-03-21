@@ -1,0 +1,103 @@
+#login-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 45%;
+  width: 30%;
+  min-height: 325px;
+  min-width: 250px;
+  transform: translate(-50%, -50%);
+  background-color: #c1c1c1;
+  opacity: 0.9;
+  border-radius: 15px;
+  box-shadow: 8px 8px 3px black;
+}
+
+#signup-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 65%;
+  width: 30%;
+  min-height: 475px;
+  min-width: 250px;
+  transform: translate(-50%, -50%);
+  background-color: #c1c1c1;
+  opacity: 0.9;
+  border-radius: 15px;
+  box-shadow: 8px 8px 3px black;
+}
+
+#login-inner-card, #signup-innner-card {
+  height: 100%;
+  width: 100%;
+  opacity: 1.0;
+}
+
+#background {
+  height: 100%;
+  width: 100%;
+  background-image: url('../assets/images/login_background.png');
+  background-position: center;
+}
+
+.header {
+  font-size: 36pt;
+  margin-bottom: 15px;
+  margin-top: 10%;
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+  width: 75%;
+  margin: 5px;
+  padding: 5px;
+}
+
+input[type=submit] {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #79c13a;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px #999;
+}
+
+input[type=submit]:active {
+  background-color: #69a832;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.invalid {
+  background: #ff6060;
+}
+
+.error-text {
+  color: red;
+}
+
+#bio {
+  width: 75%;
+}
+
+.link-caption {
+  font-size: 14px;
+  margin: 3px;
+}
+
+#link {
+  display: inline-block;
+}
+
+#link:hover {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #79c13a;
+  text-decoration: underline;
+}
