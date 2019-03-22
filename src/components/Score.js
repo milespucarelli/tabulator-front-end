@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 // import { loadContext } from '../actions/compositionActions';
 import Vex from 'vexflow';
 import SVGInteraction from '../modules/SVGInteraction'
-import { getCoords } from '../modules/SVGInteraction'
-import * as d3 from "d3";
+// import { getCoords } from '../modules/SVGInteraction'
+// import * as d3 from "d3";
 
 class Score extends Component {
   state = {
@@ -56,46 +56,46 @@ class Score extends Component {
       {top: 230, bottom: 243}
     ]
 
-    this.drawRect(this.staffNoteCoords[0], this.tabStringCoords[this.tabStringCoords.length - 1])
+    const drawRect = (noteCoord, tabCoord) => {
+      // this.context.beginPath()
+      // this.context.lineWidth = '1'
+      // this.context.strokeStyle('grey')
+      console.log(this.context)
+      this.context.rect(noteCoord.left, tabCoord.top, noteCoord.right - noteCoord.left, tabCoord.bottom - tabCoord.top)
+    }
+
+    drawRect(this.staffNoteCoords[0], this.tabStringCoords[this.tabStringCoords.length - 1])
+
+    const handleHover = ((e, coords) => {
+      console.log(coords)
+      this.staffNoteCoords.forEach(noteCoord => {
+        if (!this.state.clicked ) {
+          if (noteCoord.left < coords.x && coords.x < noteCoord.right) {
+            this.tabStringCoords.forEach((tabCoord, index) => {
+              if (tabCoord.top < coords.y && coords.y < tabCoord.bottom) {
+                console.log('fuck yes')
+                this.context.svg.removeChild(this.context.svg.lastChild)
+                drawRect(noteCoord, tabCoord)
+              }
+            })
+          }
+        }
+      })
+     })
+
+    const handleClick = ((e, coords) => {
+      this.setState({clicked: !this.state.clicked})
+    })
 
     this.interaction = new SVGInteraction(this.refs.canvas.children[0])
-    this.interaction.addEventListener('hover', this.handleHover)
-    this.interaction.addEventListener('touchStart', this.handleClick)
+    this.interaction.addEventListener('hover', handleHover)
+    this.interaction.addEventListener('touchStart', handleClick)
     // this.stringInteraction = new SVGInteraction(this.refs.canvas.children[0].children[10], this.interaction.svgPt)
     // this.staffNotes.forEach( (note, index) => {
     //   const noteInteraction = new SVGInteraction(note.attrs.el, this.interaction.svgPt)
     //   noteInteraction.addEventListener('hover', (e, coords) => console.log(coords))
     // })
   }
-
-  drawRect = (noteCoord, tabCoord) => {
-    // this.context.beginPath()
-    // this.context.lineWidth = '1'
-    // this.context.strokeStyle('grey')
-    console.log(this.context)
-    this.context.rect(noteCoord.left, tabCoord.top, noteCoord.right - noteCoord.left, tabCoord.bottom - tabCoord.top)
-  }
-
-  handleHover = ((e, coords) => {
-    console.log(coords)
-    this.staffNoteCoords.forEach(noteCoord => {
-      if (!this.state.clicked ) {
-        if (noteCoord.left < coords.x && coords.x < noteCoord.right) {
-          this.tabStringCoords.forEach((tabCoord, index) => {
-            if (tabCoord.top < coords.y && coords.y < tabCoord.bottom) {
-              console.log('fuck yes')
-              this.refs.canvas.children[0].removeChild(this.refs.canvas.children[0].lastChild)
-              this.drawRect(noteCoord, tabCoord)
-            }
-          })
-        }
-      }
-    })
-   })
-
-   handleClick = ((e, coords) => {
-     this.setState({clicked: !this.state.clicked})
-   })
 
   componentDidUpdate() {
 

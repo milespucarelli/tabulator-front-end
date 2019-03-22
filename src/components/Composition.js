@@ -1,7 +1,7 @@
 import React from 'react';
 import Score from './Score'
-import { connect } from 'react-redux';
-import { setTopNotes, setBottomNotes, setTimeSig, setKeySig } from '../actions/compositionActions';
+// import { connect } from 'react-redux';
+// import { setTopNotes, setBottomNotes, setTimeSig, setKeySig } from '../actions/compositionActions';
 
 class Composition extends React.Component {
   render() {
