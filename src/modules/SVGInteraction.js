@@ -23,11 +23,11 @@ class SVGInteraction {
   }
 
   callListeners(type, e, coords) {
-		console.log('calling listeners ' + type);
+		// console.log('calling listeners ' + type);
 		this[listeners].forEach(([listenerType, callback]) => {
-      console.log('checking listener ', listenerType);
+      // console.log('checking listener ', listenerType);
       if (type === listenerType) {
-        console.log('calling!');
+        // console.log('calling!');
         callback(e, coords);
       }
     });
