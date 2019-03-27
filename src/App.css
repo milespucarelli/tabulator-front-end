@@ -1,3 +1,8 @@
+@font-face {
+  font-family: ImprintMTShadow;
+  src: url('./assets/fonts/ImprintMTShadow.ttf');
+}
+
 .App {
   text-align: center;
   height: 100%;
@@ -17,4 +22,178 @@
 
 .App-link {
   color: #61dafb;
+}
+
+#login-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 46%;
+  width: 30%;
+  min-height: 325px;
+  min-width: 250px;
+  transform: translate(-50%, -50%);
+  background-color: #c1c1c1;
+  opacity: 0.9;
+  border-radius: 15px;
+  box-shadow: 8px 8px 3px black;
+}
+
+#signup-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 65%;
+  width: 30%;
+  min-height: 475px;
+  min-width: 250px;
+  transform: translate(-50%, -50%);
+  background-color: #c1c1c1;
+  opacity: 0.9;
+  border-radius: 15px;
+  box-shadow: 8px 8px 3px black;
+}
+
+#login-inner-card, #signup-innner-card {
+  height: 100%;
+  width: 100%;
+  opacity: 1.0;
+}
+
+#background {
+  height: 100%;
+  width: 100%;
+  background-image: url('./assets/images/login_background.png');
+  background-position: center;
+}
+
+.header {
+  font-size: 36pt;
+  margin-bottom: 15px;
+  margin-top: 10%;
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+  width: 75%;
+  margin: 5px;
+  padding: 5px;
+}
+
+input[type=submit] {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #79c13a;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px #999;
+}
+
+input[type=submit]:active {
+  background-color: #69a832;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.invalid {
+  background: #ff6060;
+}
+
+.error-text {
+  color: red;
+  margin: 5px;
+}
+
+#bio {
+  width: 75%;
+}
+
+.link-caption {
+  font-size: 14px;
+  margin: 3px;
+}
+
+#link {
+  display: inline-block;
+  margin: 5px;
+}
+
+#link:hover {
+  display: inline-block;
+  cursor: pointer;
+  background-color: #79c13a;
+  text-decoration: underline;
+}
+
+.username {
+  margin: 10px;
+}
+
+.avatar {
+  margin: 10px;
+  border-radius: 50%;
+}
+
+.bio {
+  margin: 5px;
+  padding: 10px;
+}
+
+#page {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+}
+
+#navbar {
+  grid-row: 1;
+  background-image: url('./assets/images/background.svg');
+  background-position: center;
+  background-repeat: repeat;
+}
+
+#banner-title {
+  display: inline-block;
+  font-family: ImprintMTShadow;
+  background-color: black;
+  color: white;
+  font-size: 65pt;
+  letter-spacing: 8px;
+  margin: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 15px;
+}
+
+#master-container {
+  grid-row: 2;
+  color: white;
+  height: 100%;
+  background-color: #000000;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+#info-bar {
+  grid-column: 3;
+  height: 100%;
+  width: 100%;
+}
+
+#info-card {
+  height: 50%;
+  width: 75%;
+  min-height: 325px;
+  min-width: 200px;
+  margin-top: 10%;
+  margin-left: 12%;
+  margin-right: 12%;
+  background-color: #515151;
+  border-radius: 15px;
+  box-shadow: 0px 8px 5px #2d2d2d;
 }
