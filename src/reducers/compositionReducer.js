@@ -1,18 +1,9 @@
 const initialState = {
-  tabNotes: [
-    { positions:[{str: 0, fret: ''}], duration: 'qr' },
-    { positions:[{str: 0, fret: ''}], duration: 'qr' },
-    { positions:[{str: 0, fret: ''}], duration: 'qr' },
-    { positions:[{str: 0, fret: ''}], duration: 'qr' }
-  ],
-  staffNotes: [
-    {clef: "treble", keys: ["b/4"], duration: "qr" },
-    {clef: "treble", keys: ["b/4"], duration: "qr" },
-    {clef: "treble", keys: ["b/4"], duration: "qr" },
-    {clef: "treble", keys: ["b/4"], duration: "qr" }
-  ],
+  tabNotes: Array.apply(null, Array(36)).map(() => ({ positions:[{str: 0, fret: ''}], duration: 'qr' })),
+  staffNotes: Array.apply(null, Array(36)).map(() => ({clef: "treble", keys: ["b/4"], duration: "qr" })),
   keySig: 'C',
-  timeSig: '4/4'
+  timeSig: '4/4',
+  currentComposition: null
 }
 
 const compositionReducer = (state = initialState, action) => {
@@ -23,6 +14,9 @@ const compositionReducer = (state = initialState, action) => {
         tabNotes: action.payload.tabNotes,
         staffNotes: action.payload.staffNotes
       }
+    }
+    case 'SETUP_EMPTY_COMPOSITION': {
+      return { ...initialState, currentComposition: action.payload }
     }
     case 'SET_KEY_SIG': {
       return { ...state, keySig: action.payload }

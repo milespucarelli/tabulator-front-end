@@ -144,17 +144,10 @@ input[type=submit]:active {
   padding: 10px;
 }
 
-#page {
+.page {
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 9fr;
-}
-
-#navbar {
-  grid-row: 1;
-  background-image: url('./assets/images/background.svg');
-  background-position: center;
-  background-repeat: repeat;
 }
 
 #banner-title {
@@ -170,6 +163,13 @@ input[type=submit]:active {
   border-radius: 15px;
 }
 
+#navbar {
+  grid-row: 1;
+  background-image: url('./assets/images/background.svg');
+  background-position: center;
+  background-repeat: repeat;
+}
+
 #master-container {
   grid-row: 2;
   color: white;
@@ -177,6 +177,42 @@ input[type=submit]:active {
   background-color: #000000;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+}
+
+#tab-container {
+  grid-row: 1;
+  grid-column: 2;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+#new-composition {
+  display: inline-block;
+  background-color: #515151;
+  height: 25%;
+  width: 75%;
+  position: relative;
+  border-radius: 15px;
+  margin-top: 30px;
+}
+
+#new-composition-button {
+  display: inline-block;
+  height: 135px;
+  width: 135px;
+  background-color: #777777;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#plus {
+  display: inline-block;
+  font-size: 72pt;
+  margin: 0px;
 }
 
 #info-bar {
@@ -196,4 +232,17 @@ input[type=submit]:active {
   background-color: #515151;
   border-radius: 15px;
   box-shadow: 0px 8px 5px #2d2d2d;
+}
+
+#editor {
+  grid-row: 2;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+#score {
+  height: 100%;
+  grid-column: 2;
+  text-align: left;
 }

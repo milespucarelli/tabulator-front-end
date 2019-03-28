@@ -1,18 +1,21 @@
+const setupEmptyComposition = (composition) => ({ type: 'SETUP_EMPTY_COMPOSITION', payload: composition })
+
 export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
+  let string = ((str - 1) % 6) + 1
   let changed = false
   const newTabNotes = tabNotes.map((note, index) => {
     if (index !== beat) {
       return note
     } else {
       let newPositions = note.positions.map(position => {
-        if (position.str === str || position.str === 0) {
+        if (position.str === string || position.str === 0) {
           changed = true
-          return {str: str, fret: fret}
+          return {str: string, fret: fret}
         } else {
           return position
         }
       })
-      if (!changed) newPositions.push({str: str, fret: fret})
+      if (!changed) newPositions.push({str: string, fret: fret})
       return { positions: newPositions, duration: 'q'}
     }
   })
@@ -47,6 +50,30 @@ export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
     payload: {tabNotes: newTabNotes, staffNotes: newStaffNotes}
   };
 };
+
+export const createComposition = (title, artist, user_id) => {
+  return (dispatch) => {
+    fetch("http://localhost:3000/api/v1/compositions", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json"
+      },
+      body: JSON.stringify(
+        {
+          composition:
+          {
+            title,
+            artist,
+            user_id
+          }
+        })
+    })
+      .then(res => res.json())
+      .then(data => dispatch(setupEmptyComposition(data.composition)))
+      .catch(console.error)
+  }
+}
 
 export const setTimeSig = (timeSig) => {
   return {
