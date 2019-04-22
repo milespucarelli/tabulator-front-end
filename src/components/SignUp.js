@@ -18,24 +18,28 @@ const SignUp = (props) => {
         <h1 className='header'>Sign Up</h1>
         <form onSubmit={submitHandler}>
           <input
+            id='username-input'
             type='text'
             name='username'
             value={username}
             placeholder='Username...'
             onChange={changeHandler}/><br/>
           <input
+            id='email-input'
             type='email'
             name='email'
             value={email}
             placeholder='Email...'
             onChange={changeHandler}/><br/>
           <input
+            id='password-input'
             type='password'
             name='password'
             value={password}
             placeholder='Password...'
             onChange={changeHandler}/><br/>
           <input
+            id='avatar-input'
             type='text'
             name='image'
             value={image}

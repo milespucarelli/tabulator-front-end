@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setNotes } from '../actions/compositionActions';
+import { setNotes, fetchNotes } from '../actions/compositionActions';
 import Vex from 'vexflow';
 import SVGInteraction from '../modules/SVGInteraction'
 // import { getCoords } from '../modules/SVGInteraction'
@@ -95,7 +95,7 @@ class Score extends Component {
     this.tabNotes = this.createTabNotesFromState(this.props.tabNotes)
     this.staffNoteCoords = []
 
-    let x = 30, y = 40, w = 320
+    let x = 0, y = 40, w = 320
 
     for (let i = 0; i < 9; i++) {
       let staff = null
@@ -134,7 +134,7 @@ class Score extends Component {
       })
       x += 320
       if ((i + 1) % 3 === 0) {
-        x = 30
+        x = 0
         y += 225
       }
     }
@@ -163,6 +163,13 @@ class Score extends Component {
     this.interaction.addEventListener('touchStart', this.handleClick)
     window.addEventListener('keydown', this.handleInput)
 
+    // var voice = create_4_4_voice().addTickables(notes);
+    //
+    // var vexWriter = new MidiWriter.VexFlow();
+    // var track = vexWriter.trackFromVoice(voice);
+    // var writer = new MidiWriter.Writer([track]);
+    // console.log(writer.dataUri());
+
     // Create a voice in 4/4 and add above notes
     // this.staffVoice = new Vex.Flow.Voice({num_beats: 4,  beat_value: 4});
     // this.staffVoice.addTickables(this.staffNotes);
@@ -184,10 +191,12 @@ class Score extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchNotes(this.props.currentComposition)
     this.drawStaffAndTab()
   }
 
   componentDidUpdate() {
+    this.props.fetchNotes(this.props.currentComposition)
     this.context = this.renderer.getContext()
     this.clearCanvas()
     this.drawStaffAndTab()
@@ -204,11 +213,20 @@ class Score extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({tabNotes: state.composition.tabNotes, staffNotes: state.composition.staffNotes})
+const mapStateToProps = (state) => (
+  {
+    tabNotes: state.composition.tabNotes,
+    staffNotes: state.composition.staffNotes,
+    currentComposition: state.composition.currentComposition
+  }
+)
 
 const mapDispatchToProps = (dispatch) => ({
   setNotes: (tabNotes, staffNotes, str, fret, beat) => {
     return dispatch(setNotes(tabNotes, staffNotes, str, fret, beat))
+  },
+  fetchNotes: (composition) => {
+    return dispatch(fetchNotes(composition))
   }
 })
 

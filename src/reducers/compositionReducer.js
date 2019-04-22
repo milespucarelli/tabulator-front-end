@@ -18,6 +18,9 @@ const compositionReducer = (state = initialState, action) => {
     case 'SETUP_EMPTY_COMPOSITION': {
       return { ...initialState, currentComposition: action.payload }
     }
+    case 'SET_CURRENT_COMPOSITION': {
+      return { ...state, currentComposition: action.payload }
+    }
     case 'SET_KEY_SIG': {
       return { ...state, keySig: action.payload }
     }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NavBar from './NavBar'
 import UserInfo from './UserInfo'
 import TabContainer from './TabContainer'
+import TabDirections from './TabDirections';
 import '../styles/Profile.css'
 
 class Profile extends Component {
@@ -14,8 +15,9 @@ class Profile extends Component {
             <>
               <NavBar />
               <div id='master-container'>
-                <UserInfo/>
+                <TabDirections />
                 <TabContainer/>
+                <UserInfo/>
               </div>
             </>
         }

@@ -10,6 +10,7 @@ const Login = (props) => {
         <form onSubmit={props.submitHandler}>
           <input
             className={error === 'Invalid username or password' ? 'invalid' : ''}
+            id='email-input'
             type='email'
             name='email'
             value={email}
@@ -17,6 +18,7 @@ const Login = (props) => {
             onChange={props.changeHandler}/><br/>
           <input
             className={error === 'Invalid username or password' ? 'invalid' : ''}
+            id='username-input'
             type='password'
             name='password'
             value={password}
