@@ -15,11 +15,16 @@ const compositionReducer = (state = initialState, action) => {
         staffNotes: action.payload.staffNotes
       }
     }
+    case 'SET_NOTES_AND_COMPOSITION': {
+      return {
+        ...state,
+        currentComposition: action.payload.currentComposition,
+        tabNotes: action.payload.tabNotes,
+        staffNotes: action.payload.staffNotes
+      }
+    }
     case 'SETUP_EMPTY_COMPOSITION': {
       return { ...initialState, currentComposition: action.payload }
-    }
-    case 'SET_CURRENT_COMPOSITION': {
-      return { ...state, currentComposition: action.payload }
     }
     case 'SET_KEY_SIG': {
       return { ...state, keySig: action.payload }

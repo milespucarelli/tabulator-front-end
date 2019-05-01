@@ -1,5 +1,4 @@
 const setupEmptyComposition = (composition) => ({ type: 'SETUP_EMPTY_COMPOSITION', payload: composition })
-const setCurrentComposition = (composition) => ({ type:'SET_CURRENT_COMPOSITION', payload: composition})
 
 export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
   let string = ((str - 1) % 6) + 1
@@ -68,14 +67,15 @@ export const fetchCurrentComposition = (compositionId) => {
       }
     })
       .then(res => res.json())
-      .then(data => dispatch(setCurrentComposition(data.composition)))
+      .then(data => dispatch(loadNotes(data.composition)))
       .catch(console.error)
   }
 }
 
-const setNotesFromFetch = (composition) => {
+export const loadNotes = (composition) => {
+  console.log(composition)
   const tabNotes = composition.notes.map(note => {
-    let positions = composition.positions.find(position => position.note_id === note.id )
+    let positions = composition.positions.filter(position => position.note_id === note.id )
     let newPositions = positions.map(position => {
       if (position.fret) {
         return {str: position.str, fret: parseInt(position.fret)}
@@ -91,15 +91,15 @@ const setNotesFromFetch = (composition) => {
       if (position.str !== 0) {
         return convertTabToNote(position.str, position.fret)
       } else {
-        return ['b/4']
+        return 'b/4'
       }
     })
-    return {clef: "treble", keys: keys, duration: note.duration }
+    return { clef: "treble", keys: keys, duration: note.duration }
   })
 
   return {
-    type: 'SET_NOTES',
-    payload: {tabNotes: tabNotes, staffNotes: staffNotes}
+    type: 'SET_NOTES_AND_COMPOSITION',
+    payload: { currentComposition: composition, tabNotes, staffNotes }
   }
 }
 
@@ -127,24 +127,24 @@ export const createComposition = (title, artist, user_id) => {
   }
 }
 
-export const fetchNotes = (composition) => {
-  return (dispatch) => {
-    if (composition) {
-      return (dispatch) => {
-        fetch(`http://localhost:3000/api/v1/compositions/${composition.id}`, {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-            accepts: "application/json"
-          }
-        })
-          .then(res => res.json())
-          .then(data => dispatch(setNotesFromFetch(data.composition)))
-          .catch(console.error)
-      }
-    }
-  }
-}
+// export const fetchNotes = (composition) => {
+//   return (dispatch) => {
+//     if (composition) {
+//       return (dispatch) => {
+//         fetch(`http://localhost:3000/api/v1/compositions/${composition.id}`, {
+//           method: "GET",
+//           headers: {
+//             "content-type": "application/json",
+//             accepts: "application/json"
+//           }
+//         })
+//           .then(res => res.json())
+//           .then(data => dispatch(loadNotes(data.composition)))
+//           .catch(console.error)
+//       }
+//     }
+//   }
+// }
 
 export const saveNotes = (composition, tabNotes) => {
   return (dispatch) => {
@@ -163,7 +163,7 @@ export const saveNotes = (composition, tabNotes) => {
         })
     })
       .then(res => res.json())
-      .then(data => dispatch(setupEmptyComposition(data.composition)))
+      .then(data => dispatch(loadNotes(data.composition)))
       .catch(console.error)
   }
 }

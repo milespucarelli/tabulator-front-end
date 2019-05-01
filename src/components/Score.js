@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setNotes, fetchNotes } from '../actions/compositionActions';
+import { setNotes, loadNotes, fetchCurrentComposition } from '../actions/compositionActions';
 import Vex from 'vexflow';
 import SVGInteraction from '../modules/SVGInteraction'
 // import { getCoords } from '../modules/SVGInteraction'
@@ -73,6 +73,7 @@ class Score extends Component {
 
   createStaffNotesFromState = (staffNotes) => {
     return staffNotes.map(note => {
+      console.log(note)
       let vfNote = new Vex.Flow.StaveNote(note)
       note.keys.forEach((key, index) => {
         if (key.includes('#')) {
@@ -191,14 +192,21 @@ class Score extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchNotes(this.props.currentComposition)
     this.drawStaffAndTab()
+    if (this.props.currentComposition) {
+      this.props.loadNotes(this.props.currentComposition)
+      this.drawStaffAndTab()
+    } else {
+      let id = window.location.pathname.split('/').pop()
+      this.props.fetchCurrentComposition(id)
+    }
   }
 
   componentDidUpdate() {
-    this.props.fetchNotes(this.props.currentComposition)
     this.context = this.renderer.getContext()
     this.clearCanvas()
+    // console.log(this.props.currentComposition)
+    // this.props.loadNotes(this.props.currentComposition)
     this.drawStaffAndTab()
   }
 
@@ -225,8 +233,11 @@ const mapDispatchToProps = (dispatch) => ({
   setNotes: (tabNotes, staffNotes, str, fret, beat) => {
     return dispatch(setNotes(tabNotes, staffNotes, str, fret, beat))
   },
-  fetchNotes: (composition) => {
-    return dispatch(fetchNotes(composition))
+  loadNotes: (composition) => {
+    return dispatch(loadNotes(composition))
+  },
+  fetchCurrentComposition: (id) => {
+    return dispatch(fetchCurrentComposition(id))
   }
 })
 

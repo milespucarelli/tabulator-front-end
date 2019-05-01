@@ -9,6 +9,7 @@ const UserTabContainer = (props) => {
   }
   return (
     <div id='user-tabs'>
+      <h1>Your Compositions: </h1>
       {compositions}
     </div>
   );
