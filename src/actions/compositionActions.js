@@ -73,9 +73,10 @@ export const fetchCurrentComposition = (compositionId) => {
 }
 
 export const loadNotes = (composition) => {
-  console.log(composition)
-  const tabNotes = composition.notes.map(note => {
-    let positions = composition.positions.filter(position => position.note_id === note.id )
+  let sortedNotes = composition.notes.sort((note1, note2) => note1.id - note2.id)
+  let sortedPositions = composition.positions.sort((position1, position2) => position1.id - position2.id)
+  const tabNotes = sortedNotes.map(note => {
+    let positions = sortedPositions.filter(position => position.note_id === note.id )
     let newPositions = positions.map(position => {
       if (position.fret) {
         return {str: position.str, fret: parseInt(position.fret)}
@@ -163,10 +164,12 @@ export const saveNotes = (composition, tabNotes) => {
         })
     })
       .then(res => res.json())
-      .then(data => dispatch(loadNotes(data.composition)))
+      .then(console.log)
       .catch(console.error)
   }
 }
+
+// data => dispatch(loadNotes(data.composition))
 
 export const setTimeSig = (timeSig) => {
   return {

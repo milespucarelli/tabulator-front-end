@@ -73,7 +73,6 @@ class Score extends Component {
 
   createStaffNotesFromState = (staffNotes) => {
     return staffNotes.map(note => {
-      console.log(note)
       let vfNote = new Vex.Flow.StaveNote(note)
       note.keys.forEach((key, index) => {
         if (key.includes('#')) {
@@ -205,8 +204,6 @@ class Score extends Component {
   componentDidUpdate() {
     this.context = this.renderer.getContext()
     this.clearCanvas()
-    // console.log(this.props.currentComposition)
-    // this.props.loadNotes(this.props.currentComposition)
     this.drawStaffAndTab()
   }
 
