@@ -315,6 +315,10 @@ input[type=submit]:active {
   transform: translateY(4px);
 }
 
+#play {
+  width: 40%;
+}
+
 #score {
   height: 100%;
   grid-column: 2;

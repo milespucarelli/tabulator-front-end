@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "d3": "^5.9.2",
     "midi-writer-js": "^1.7.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -12,8 +11,7 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "vexflow": "^1.2.89",
-    "vextab": "^2.0.13"
+    "vexflow": "^1.2.89"
   },
   "scripts": {
     "start": "react-scripts start",
