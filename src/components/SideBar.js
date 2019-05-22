@@ -1,31 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { saveNotes } from '../actions/compositionActions';
+import { saveNotes } from '../actions/compositionActions'
 import svg  from '../assets/images/play-button.svg'
-import MidiWriter from 'midi-writer-js'
+import Tone from 'tone'
+import { SampleLibrary } from '../modules/instruments/Tonejs-Instruments'
 
 class SideBar extends Component {
   saveHandler = () => {
     this.props.saveNotes(this.props.currentComposition, this.props.tabNotes)
   }
 
-
-
   playHandler = () => {
-    let track = new MidiWriter.Track();
-    let notes = this.props.staffNotes.map(note => {
-      let pitches = note.keys.map(key => {
-        let split = key.split("/")
+    if (Tone.context.state !== 'running') {
+      Tone.context.resume()
+    }
+    let guitar = SampleLibrary.load({
+      instruments: "guitar-electric",
+      baseUrl: "/tonejs-instruments/samples/"
+    })
+    console.log(guitar)
+    Tone.Buffer.on('load', () => {
+      guitar.release = 0.5
+      guitar.toMaster()
+      let notes = this.props.staffNotes.map(note => {
+        let split = note.keys[0].split("/")
         let letterNote = split[0].charAt(0).toUpperCase() + split[0].slice(1)
         return letterNote + split[1]
       })
-      return new MidiWriter.NoteEvent({pitch: pitches, duration: this.convertDuration(note.duration)})
+      console.log(notes)
+      let seq = new Tone.Sequence(function(time, note){
+      	guitar.triggerAttack(note, '4n', time)
+      }, notes, "4n")
+      Tone.Transport.start()
+      seq.start(Tone.now())
     })
-    track.addEvent(notes, function(event, index) {
-      return {sequential:true}
-    })
-    let write = new MidiWriter.Writer(track)
-    console.log(write.dataUri())
   }
 
   convertDuration = (duration) => {
@@ -43,7 +51,7 @@ class SideBar extends Component {
        <button id='save' onClick={this.saveHandler}>Save</button><br/><br/>
        <img id='play' src={svg} alt='play' onClick={this.playHandler}/>
       </div>
-    );
+    )
   }
 }
 
@@ -59,4 +67,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar)
