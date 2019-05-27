@@ -1,38 +1,32 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { saveNotes } from '../actions/compositionActions'
-import svg  from '../assets/images/play-button.svg'
-import Tone from 'tone'
-import { SampleLibrary } from '../modules/instruments/Tonejs-Instruments'
+import svg from '../assets/images/play-button.svg'
+import MIDISounds from 'midi-sounds-react'
 
 class SideBar extends Component {
+  componentDidMount() {
+    this.midiSounds.cacheInstrument(335);
+  }
+
   saveHandler = () => {
     this.props.saveNotes(this.props.currentComposition, this.props.tabNotes)
   }
 
   playHandler = () => {
-    if (Tone.context.state !== 'running') {
-      Tone.context.resume()
-    }
-    let guitar = SampleLibrary.load({
-      instruments: "guitar-electric",
-      baseUrl: "/tonejs-instruments/samples/"
-    })
-    console.log(guitar)
-    Tone.Buffer.on('load', () => {
-      guitar.release = 0.5
-      guitar.toMaster()
-      let notes = this.props.staffNotes.map(note => {
-        let split = note.keys[0].split("/")
-        let letterNote = split[0].charAt(0).toUpperCase() + split[0].slice(1)
-        return letterNote + split[1]
+    const strings = { '1': 64, '2': 59, '3': 55, '4': 50, '5': 45, '6': 40 }
+    let beats = this.props.tabNotes.map(tabNote => {
+      return tabNote.positions.map(position => {
+        let {str, fret} = position
+        if (fret !== '') {
+          return strings[`${str}`] + parseInt(fret)
+        } else {
+          return 0
+        }
       })
-      console.log(notes)
-      let seq = new Tone.Sequence(function(time, note){
-      	guitar.triggerAttack(note, '4n', time)
-      }, notes, "4n")
-      Tone.Transport.start()
-      seq.start(Tone.now())
+    })
+    beats.forEach((beat, index) => {
+      this.midiSounds.playChordAt(this.midiSounds.contextTime() + 0.25 * index, 335, beat, 0.50)
     })
   }
 
@@ -50,6 +44,7 @@ class SideBar extends Component {
       <div id='sidebar'>
        <button id='save' onClick={this.saveHandler}>Save</button><br/><br/>
        <img id='play' src={svg} alt='play' onClick={this.playHandler}/>
+       <MIDISounds ref={(ref) => (this.midiSounds = ref)} appElementName="root" instruments={[320]} />
       </div>
     )
   }
