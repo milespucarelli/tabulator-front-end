@@ -17,7 +17,7 @@ class Composition extends React.Component {
     const compositionId = parseInt(splitUrl[splitUrl.length - 1])
     return (
       <div className="page">
-        <NavBar />
+        <NavBar history={this.props.history}/>
         <div id='editor'>
           <SideBar />
           <Score compositionId={compositionId}/>

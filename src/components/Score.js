@@ -13,13 +13,13 @@ class Score extends Component {
   }
 
   drawRect = (noteCoord, tabCoord) => {
-    this.context.rect(noteCoord.left, tabCoord.top, 12, 15)
+    this.context.rect(noteCoord.right - 15, tabCoord.top, 15, 15)
   }
 
   handleHover = (e, coords) => {
     this.context = this.renderer.getContext()
     this.staffNoteCoords.forEach(noteCoord => {
-      if (!this.state.clicked ) {
+      if (!this.state.clicked) {
         if (noteCoord.left < coords.x && coords.x < noteCoord.right) {
           this.tabStringCoords.forEach((tabCoord, index) => {
             if (tabCoord.top < coords.y && coords.y < tabCoord.bottom) {
@@ -56,14 +56,23 @@ class Score extends Component {
 
   handleInput = (e) => {
     if (this.state.clicked) {
-      console.log(e.key)
-      this.props.setNotes(
-        this.props.tabNotes,
-        this.props.staffNotes,
-        this.state.current.str,
-        parseInt(e.key),
-        this.state.current.beat
-      )
+      if (!isNaN(parseInt(e.key)) && e.code.includes('Digit')) {
+        this.props.setNotes(
+          this.props.tabNotes,
+          this.props.staffNotes,
+          this.state.current.str,
+          parseInt(e.key),
+          this.state.current.beat
+        )
+      } else if (e.key === 'Backspace') {
+        this.props.setNotes(
+          this.props.tabNotes,
+          this.props.staffNotes,
+          this.state.current.str,
+          '',
+          this.state.current.beat
+        )
+      }
     }
   }
 
@@ -127,9 +136,11 @@ class Score extends Component {
       if (i % 3 !== 0) {
         this.context.svg.removeChild(this.context.svg.lastChild)
       }
-      staffNotes.map(note => {
-        const bbox = note.getBoundingBox()
-        this.staffNoteCoords.push({ left: bbox.x, right: bbox.x + bbox.w })
+      staffNotes.forEach(note => {
+        if (note.attrs.el.children[0].classList.contains('vf-note')) {
+          const bbox = note.getBoundingBox()
+          this.staffNoteCoords.push({ left: bbox.x, right: bbox.x + bbox.w })
+        }
         return ''
       })
       x += 320

@@ -2,6 +2,8 @@ const loginUserSuccess = (user) => ({ type: 'LOGIN_USER_SUCCESS', payload: user 
 const loginUserError = (error) => ({ type: 'LOGIN_USER_ERROR', payload: error })
 const loginUserPending = () => ({ type: 'LOGIN_USER_PENDING' })
 
+export const logOut = () => ({type: 'LOGOUT_USER'})
+
 export const getUserFromLocalStorage = token => {
   return (dispatch) => {
     dispatch(loginUserPending())

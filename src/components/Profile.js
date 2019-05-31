@@ -13,7 +13,7 @@ class Profile extends Component {
         { this.props.currentComposition ?
             this.props.history.push(`/composition/${this.props.currentComposition.id}`) :
             <>
-              <NavBar />
+              <NavBar history={this.props.history}/>
               <div id='master-container'>
                 <TabDirections />
                 <TabContainer/>

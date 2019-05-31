@@ -15,6 +15,9 @@ const userReducer = (state = initialState, action) => {
     case 'LOGIN_USER_PENDING': {
       return {...state, loading: true }
     }
+    case 'LOGOUT_USER': {
+      return initialState
+    }
     default:
       return state
   }

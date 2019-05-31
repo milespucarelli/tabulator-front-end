@@ -4,25 +4,33 @@ export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
   let string = ((str - 1) % 6) + 1
   let changed = false
   const newTabNotes = tabNotes.map((note, index) => {
+    let newPositions = []
     if (index !== beat) {
       return note
-    } else {
-      let newPositions = note.positions.map(position => {
+    } else if (fret !== '') {
+      newPositions = note.positions.map(position => {
         if (position.str === string || position.str === 0) {
           changed = true
-          return {str: string, fret: fret}
+          return { str: string, fret: fret }
         } else {
           return position
         }
       })
       if (!changed) newPositions.push({str: string, fret: fret})
       return { positions: newPositions, duration: 'q'}
+    } else if (note.positions.length > 1) {
+      newPositions = note.positions.filter(position => position.str !== string)
+      return { positions: newPositions, duration: 'q'}
+    } else {
+      return { positions:[{str: 0, fret: ''}], duration: 'qr' }
     }
   })
 
   const newStaffNotes = newTabNotes.map((note, index) => {
     if (index !== beat) {
       return staffNotes[index]
+    } else if (note.duration.includes('r')) {
+      return {clef: "treble", keys: ["b/4"], duration: "qr" }
     } else {
       let keys = note.positions.map(position => convertTabToNote(position.str, position.fret))
       return {clef: "treble", keys: keys, duration: "q" }

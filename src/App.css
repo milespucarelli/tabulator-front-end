@@ -1,4 +1,4 @@
-a@font-face {
+@font-face {
   font-family: ImprintMTShadow;
   src: url('./assets/fonts/ImprintMTShadow.ttf');
 }
@@ -72,7 +72,7 @@ a:hover {
 #background {
   height: 100%;
   width: 100%;
-  background-image: url('./assets/images/login_background.png');
+  background-image: url('./assets/images/login_background.jpg');
   background-position: center;
 }
 
@@ -160,7 +160,7 @@ input[type=submit]:active {
   margin: 10px;
 }
 
-.avatar {
+.user-avatar {
   margin: 10px;
   border-radius: 50%;
   max-width: 100%;
@@ -178,7 +178,20 @@ input[type=submit]:active {
   grid-template-rows: 1fr 9fr;
 }
 
+#navbar {
+  grid-row: 1;
+  background-image: url('./assets/images/background.svg');
+  background-position: center;
+  background-repeat: repeat;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 #banner-title {
+  grid-column: 2;
+}
+
+#banner-title p {
   display: inline-block;
   font-family: ImprintMTShadow;
   background-color: black;
@@ -191,11 +204,12 @@ input[type=submit]:active {
   border-radius: 15px;
 }
 
-#navbar {
-  grid-row: 1;
-  background-image: url('./assets/images/background.svg');
-  background-position: center;
-  background-repeat: repeat;
+#avatar-container {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 30px;
 }
 
 #master-container {

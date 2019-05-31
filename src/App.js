@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import LoginSignupPage from './components/LoginSignupPage'
 import Profile from './components/Profile'
 import Composition from './components/Composition.js'
+import Home from './components/Home'
 import './App.css';
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path='/signup' component={LoginSignupPage} />
             <Route path='/profile' component={Profile} />
             <Route path='/composition/:id' component={Composition} />
+            <Route path='/' component={Home} />
           </Switch>}
       </div>
     );
