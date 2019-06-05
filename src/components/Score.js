@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { setNotes, loadNotes, fetchCurrentComposition } from '../actions/compositionActions';
 import Vex from 'vexflow';
 import SVGInteraction from '../modules/SVGInteraction'
-// import { getCoords } from '../modules/SVGInteraction'
-// import * as d3 from "d3";
 
 class Score extends Component {
   state = {

@@ -238,8 +238,6 @@ input[type=submit]:active {
 
 #new-composition {
   display: inline-block;
-  /* background-color: #497000; */
-  /* background-color: #828282; */
   background-image: url('./assets/images/tweed.png');
   height: 250px;
   width: 60%;
@@ -269,7 +267,6 @@ input[type=submit]:active {
 .userTab {
   display: inline-block;
   width: 60%;
-  /* background-color: #828282; */
   background-image: url('./assets/images/tweed.png');
   border-radius: 15px;
   box-shadow: 0px 4px 4px #333333;
@@ -290,7 +287,6 @@ input[type=submit]:active {
   margin-top: 10%;
   margin-left: 12%;
   margin-right: 12%;
-  /* background-color: #828282; */
   background-image: url('./assets/images/tweed.png');
   border-radius: 15px;
   box-shadow: 0px 4px 4px #333333;

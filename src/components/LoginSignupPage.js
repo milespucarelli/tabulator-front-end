@@ -50,16 +50,6 @@ class LoginSignupPage extends Component {
     return this.props.createUser({email, username, password, image, bio})
   }
 
-  // submitChecker = (result) => {
-  //   if (result === 'redirect') {
-  //     console.log('yo')
-  //     return <Redirect to='/login' />
-  //   } else {
-  //     console.log('good')
-  //     return <Redirect to='/profile' />
-  //   }
-  // }
-
   render() {
     let {
       email,

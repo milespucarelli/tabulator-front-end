@@ -136,25 +136,6 @@ export const createComposition = (title, artist, user_id) => {
   }
 }
 
-// export const fetchNotes = (composition) => {
-//   return (dispatch) => {
-//     if (composition) {
-//       return (dispatch) => {
-//         fetch(`http://localhost:3000/api/v1/compositions/${composition.id}`, {
-//           method: "GET",
-//           headers: {
-//             "content-type": "application/json",
-//             accepts: "application/json"
-//           }
-//         })
-//           .then(res => res.json())
-//           .then(data => dispatch(loadNotes(data.composition)))
-//           .catch(console.error)
-//       }
-//     }
-//   }
-// }
-
 export const saveNotes = (composition, tabNotes) => {
   return (dispatch) => {
     fetch(`http://localhost:3000/api/v1/compositions/${composition.id}`, {
@@ -176,8 +157,6 @@ export const saveNotes = (composition, tabNotes) => {
       .catch(console.error)
   }
 }
-
-// data => dispatch(loadNotes(data.composition))
 
 export const setTimeSig = (timeSig) => {
   return {
