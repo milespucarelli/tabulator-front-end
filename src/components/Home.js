@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header } from 'semantic-ui-react'
+import { Container, Item, Header } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 class Home extends Component {
@@ -8,7 +8,11 @@ class Home extends Component {
     return (
       <div id='background'>
         <Container text>
-        <Header as='h1' content='TABULATOR' inverted />
+          <Item>
+            <Item.Content>
+              <Item.Header as='h1' content='TABULATOR' inverted />
+            </Item.Content>
+          </Item>
         </Container>
       </div>
     );
