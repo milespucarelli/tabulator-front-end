@@ -108,7 +108,7 @@ const Home = () => (
               Let us delight your customers and empower your needs... through pure data analytics.
             </p>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
+              Instantly Play Back your Composition and Hear it Come to Life
             </Header>
             <p style={{ fontSize: '1.33em' }}>
               Yes that's right, you thought it was the stuff of dreams, but even bananas can be
