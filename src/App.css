@@ -37,6 +37,7 @@ a:hover {
   height: 100%;
   width: 100%;
   background-image: url('./assets/images/login_background.jpg');
+  background-attachment: scroll;
   background-position: center;
   position: relative;
   display: flex;
@@ -53,12 +54,17 @@ a:hover {
 }
 
 #homepage-tagline {
-  padding: 0.2em;
+  padding: 0.3em 0.5em;
   display: inline-block;
   font-size: 1.7em;
   font-weight: normal;
   background-color: #6ac62e;
+  box-shadow: 5px 5px 5px #333333, -5px 5px 5px #333333;
   border-radius: 15px;
+}
+
+#mini-canvas {
+  padding-left: 15%;
 }
 
 .overlay{
