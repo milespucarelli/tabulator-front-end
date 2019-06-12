@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import Vex from 'vexflow';
-import SVGInteraction from '../modules/SVGInteraction'
+import MIDISounds from 'midi-sounds-react'
 import { Button,
   Container,
   Divider,
@@ -89,6 +89,9 @@ ResponsiveContainer.propTypes = {
 
 
 class Home extends Component {
+  state = {
+    clicked: false
+  }
   clearCanvas = () => {
     this.context.svg.remove()
   }
@@ -162,8 +165,38 @@ class Home extends Component {
     this.context.svg.removeChild(this.context.svg.lastChild)
   }
 
+  playHandler = () => {
+    if (this.state.clicked) {
+      this.midiSounds.stopPlayLoop()
+		  this.midiSounds.beatIndex = 0
+    } else {
+      const strings = { '1': 64, '2': 59, '3': 55, '4': 50, '5': 45, '6': 40 }
+      let beats = this.tabNotes.map(tabNote => {
+        let positions = tabNote.positions.map(position => {
+          let {str, fret} = position
+          return strings[`${str}`] + parseInt(fret)
+        })
+        return [[], [[335, positions, 1/4]]]
+      })
+      this.midiSounds.setInstrumentVolume(335, 0.10);
+      this.midiSounds.startPlayLoop(beats, 270, 1/4, this.midiSounds.beatIndex)
+    }
+
+    this.setState({clicked: !this.state.clicked})
+  }
+
+  convertDuration = (duration) => {
+    switch (duration) {
+      case 'q':
+        return '4'
+      default:
+        return ''
+    }
+  }
+
   componentDidMount() {
     this.drawStaffAndTab()
+    this.midiSounds.cacheInstrument(335);
   }
   // <Container text>
   //   <Item>
@@ -191,8 +224,9 @@ class Home extends Component {
                   Instantly Play Back your Composition and Hear it Come to Life
                 </Header>
                 <p style={{ fontSize: '1.33em' }}>
-                  Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-                  bioengineered.
+                  Tabulator leverages the power of <a href='https://github.com/0xfe/vexflow'> VexFlow </a>
+                  and <a href='https://github.com/surikov/midi-sounds-react'> React MIDI Sounds </a>
+                  to score, tab, and perform your musical idea as you write it.
                 </p>
               </Grid.Column>
               <Grid.Column width={6}>
@@ -205,7 +239,19 @@ class Home extends Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column textAlign='center'>
-                <Button style={{backgroundColor: '#6ac62e'}} size='huge' inverted>Play It Back</Button>
+                <Button
+                  onClick={this.playHandler}
+                  style={{backgroundColor: '#6ac62e'}}
+                  size='huge'
+                  inverted>
+                    {this.state.clicked ? 'Cut it' : 'Play It Back'}
+                </Button>
+                <div id='midi-logo'>
+                  <MIDISounds
+                    ref={(ref) => (this.midiSounds = ref)}
+                    appElementName="root"
+                    instruments={[335]}/>
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>

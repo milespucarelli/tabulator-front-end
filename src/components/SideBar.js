@@ -44,7 +44,7 @@ class SideBar extends Component {
       <div id='sidebar'>
        <button id='save' onClick={this.saveHandler}>Save</button><br/><br/>
        <img id='play' src={svg} alt='play' onClick={this.playHandler}/>
-       <MIDISounds ref={(ref) => (this.midiSounds = ref)} appElementName="root" instruments={[320]} />
+       <MIDISounds ref={(ref) => (this.midiSounds = ref)} appElementName="root" instruments={[335]} />
       </div>
     )
   }
