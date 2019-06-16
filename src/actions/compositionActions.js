@@ -1,4 +1,5 @@
 const setupEmptyComposition = (composition) => ({ type: 'SETUP_EMPTY_COMPOSITION', payload: composition })
+export const setComposition = (composition) => ({ type: 'SET_COMPOSITION', payload: composition })
 
 export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
   let string = ((str - 1) % 6) + 1

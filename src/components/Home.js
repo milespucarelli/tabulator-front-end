@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Vex from 'vexflow';
 import MIDISounds from 'midi-sounds-react'
@@ -14,6 +15,9 @@ import { Button,
   Segment
 } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
+import tabText from '../assets/images/tab_text.jpg'
+import vextab from '../assets/images/vextab_sample.png'
+import miles from '../assets/images/headshot2_square.jpg'
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
@@ -39,6 +43,14 @@ const HomepageHeading = () => (
 )
 
 class DesktopContainer extends Component {
+  loginClickHandler = () => {
+    this.props.history.push('/login')
+  }
+
+  signupClickHandler = () => {
+    this.props.history.push('/signup')
+  }
+
   render() {
     const { children } = this.props
 
@@ -55,12 +67,16 @@ class DesktopContainer extends Component {
             <Menu inverted size='large' style={{background: 'transparent'}}>
               <Container>
                 <Menu.Item position='right'>
-                  <Button as='a' inverted>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
+                  <Link to='/login'>
+                    <Button as='a' inverted>
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link to='/signup'>
+                    <Button as='a'inverted style={{ marginLeft: '0.5em' }}>
+                      Sign Up
+                    </Button>
+                  </Link>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -209,7 +225,7 @@ class Home extends Component {
   render() {
     return (
       <ResponsiveContainer>
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        <Segment style={{ padding: '5em 0em' }} vertical>
           <Grid container stackable verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={8}>
@@ -224,9 +240,13 @@ class Home extends Component {
                   Instantly Play Back your Composition and Hear it Come to Life
                 </Header>
                 <p style={{ fontSize: '1.33em' }}>
-                  Tabulator leverages the power of <a href='https://github.com/0xfe/vexflow'> VexFlow </a>
-                  and <a href='https://github.com/surikov/midi-sounds-react'> React MIDI Sounds </a>
-                  to score, tab, and perform your musical idea as you write it.
+                  Tabulator leverages the power of <a
+                    className='homepage-link'
+                    href='https://github.com/0xfe/vexflow'>VexFlow
+                  </a> and <a
+                    className='homepage-link'
+                    href='https://github.com/surikov/midi-sounds-react'>React MIDI Sounds
+                  </a> to score, tab, and perform your musical idea as you write it.
                 </p>
               </Grid.Column>
               <Grid.Column width={6}>
@@ -240,10 +260,9 @@ class Home extends Component {
             <Grid.Row>
               <Grid.Column textAlign='center'>
                 <Button
+                  className='homepage-button'
                   onClick={this.playHandler}
-                  style={{backgroundColor: '#6ac62e'}}
-                  size='huge'
-                  inverted>
+                  size='huge'>
                     {this.state.clicked ? 'Cut it' : 'Play It Back'}
                 </Button>
                 <div id='midi-logo'>
@@ -259,87 +278,139 @@ class Home extends Component {
         <Segment style={{ padding: '0em' }} vertical>
           <Grid celled='internally' columns='equal' stackable>
             <Grid.Row textAlign='center'>
-              <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Header as='h3' style={{ fontSize: '2em' }}>
-                  "What a Company"
+              <Grid.Column style={{ paddingBottom: '3em', paddingTop: '3em' }}>
+                <Header as='h3' style={{ fontSize: '3.5em' }}>
+                  Turn this...
                 </Header>
-                <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
+                <Image src={tabText} style={{paddingTop: '1.5em'}}/>
+                <Image src={tabText} style={{paddingTop: '1.5em'}}/>
               </Grid.Column>
-              <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-                <Header as='h3' style={{ fontSize: '2em' }}>
-                  "I shouldn't have gone with their competitor."
+              <Grid.Column style={{ paddingBottom: '3em', paddingTop: '3em' }}>
+                <Header as='h3' style={{ fontSize: '3.5em' }}>
+                  Into this!
                 </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  <Image avatar src='/images/avatar/large/nan.jpg' />
-                  <b>Nan</b> Chief Fun Officer Acme Toys
-                </p>
+                <Image src={vextab} fluid style={{paddingLeft: '1.5em'}}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
         </Segment>
-        <Segment style={{ padding: '8em 0em' }} vertical>
+        <Segment style={{ padding: '5em 0em' }} vertical>
           <Container text>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              Breaking The Grid, Grabs Your Attention
+              Built with Open Source to <i>Be</i> Open Source
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Instead of focusing on content creation and hard work, we have learned how to master the
-              art of doing nothing by providing massive amounts of whitespace and generic content that
-              can seem massive, monolithic and worth your attention.
+            <p style={{ fontSize: '1.2em' }}>
+              This application employs technology developed by several
+              open-source projects and their communities, including <a
+                className='homepage-link'
+                href='https://reactjs.org/'>React</a>, <a
+                className='homepage-link'
+                href='https://redux.js.org/'>Redux</a>, <a
+                className='homepage-link'
+                href='https://rubyonrails.org/'>Ruby On Rails</a>, <a
+                className='homepage-link'
+                href='https://github.com/0xfe/vexflow'>VexFlow</a>, and <a
+                className='homepage-link'
+                href='https://github.com/surikov/midi-sounds-react'> React MIDI Sounds</a>.
+              Following their lead, the code for this project is published
+              openly on GitHub with the ability to submit issues you find on the site or
+              pull requests for your contributions to improve Tablutor.
             </p>
-            <Button as='a' size='large'>
-              Read More
+            <Button
+              as='a'
+              className='homepage-button'
+              href='https://github.com/milespucarelli/tabulator-front-end'
+              size='large'
+              inverted>
+              Front End Repo
+            </Button>
+            <Button
+              as='a'
+              className='homepage-button'
+              href='https://github.com/milespucarelli/Tabulator-Back-End'
+              size='large'
+              inverted>
+              Back End Repo
             </Button>
             <Divider
-              as='h4'
-              className='header'
-              horizontal
-              style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-            >
-              <a href='#'>Case Studies</a>
-            </Divider>
+              style={{ margin: '3em 0em'}}
+            ></Divider>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              Did We Tell You About Our Bananas?
+              Built To Make Music Collaboration Easier
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-              it's really true. It took years of gene splicing and combinatory DNA research, but our
-              bananas can really dance.
+            <p style={{ fontSize: '1.2em' }}>
+              Sharing your musical ideas with bandmates or fellow musicians can
+              be difficult when you're not in the same place. Now you can
+              quickly and inuitively tab it out and store it online for free. No
+              uploading or downloading from a shared drive necessary. Just send a
+              link and your collaborator will have that riff down in no time.
             </p>
-            <Button as='a' size='large'>
-              I'm Still Quite Interested
-            </Button>
           </Container>
         </Segment>
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+        <Segment id='homepage-footer' inverted vertical style={{ padding: '2em 0em' }}>
           <Container>
             <Grid divided inverted stackable>
               <Grid.Row>
-                <Grid.Column width={3}>
-                  <Header inverted as='h4' content='About' />
-                  <List link inverted>
-                    <List.Item as='a'>Sitemap</List.Item>
-                    <List.Item as='a'>Contact Us</List.Item>
-                    <List.Item as='a'>Religious Ceremonies</List.Item>
-                    <List.Item as='a'>Gazebo Plans</List.Item>
-                  </List>
-                </Grid.Column>
-                <Grid.Column width={3}>
-                  <Header inverted as='h4' content='Services' />
-                  <List link inverted>
-                    <List.Item as='a'>Banana Pre-Order</List.Item>
-                    <List.Item as='a'>DNA FAQ</List.Item>
-                    <List.Item as='a'>How To Access</List.Item>
-                    <List.Item as='a'>Favorite X-Men</List.Item>
-                  </List>
-                </Grid.Column>
-                <Grid.Column width={7}>
-                  <Header as='h4' inverted>
-                    Footer Header
+                <Grid.Column width={10}>
+                  <Header as='h3' inverted>
+                    Tabulator Creator: Miles Pucarelli
                   </Header>
-                  <p>
-                    Extra space for a call to action inside the footer that could help re-engage users.
-                  </p>
+                  <Grid divided inverted stackable>
+                    <Grid.Row>
+                      <Grid.Column width={3}>
+                        <Image avatar src={miles} size='tiny'/>
+                      </Grid.Column>
+                      <Grid.Column width={11}>
+                        <p>
+                          Miles is a job-seeking full stack web developer and
+                          recent Flatiron School graduate with a passion for the
+                          integration of music in technology. Tabulator had been
+                          brewing in his head for years prior to beginning
+                          its development as his final project for Flatiron.
+                        </p>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h3' content='Links' />
+                  <List link inverted size='small'>
+                    <List.Item
+                      as='a'
+                      href='http://bit.ly/resume-miles-pucarelli'>
+                      Resume
+                    </List.Item>
+                    <List.Item
+                      as='a'
+                      href='https://www.linkedin.com/in/miles-pucarelli/'>
+                      LinkedIn
+                    </List.Item>
+                    <List.Item
+                      as='a'
+                      href='https://github.com/milespucarelli'>
+                      GitHub
+                    </List.Item>
+                    <List.Item
+                      as='a'
+                      href='https://medium.com/@miles.pucarelli'>
+                      Medium
+                    </List.Item>
+                    <List.Item
+                      as='a'
+                      href='https://www.hackerrank.com/miles_of_code'>
+                      HackerRank
+                    </List.Item>
+                  </List>
+                </Grid.Column>
+                <Grid.Column width={3}>
+                  <Header inverted as='h3' content='Future Features' />
+                  <List link inverted size='small'>
+                    <List.Item as='a'>More Beat Subdivisions</List.Item>
+                    <List.Item as='a'>Guitar Dynamics</List.Item>
+                    <List.Item as='a'>Multiple Tracks</List.Item>
+                    <List.Item as='a'>Automatic Save</List.Item>
+                    <List.Item as='a'>Co-Editing & Restricting Access</List.Item>
+                  </List>
                 </Grid.Column>
               </Grid.Row>
             </Grid>

@@ -1,10 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Dropdown, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logOut } from '../actions/userActions'
 import 'semantic-ui-css/semantic.min.css';
 
 const NavBar = (props) => {
+  const profile = () => {
+    props.history.push('/profile')
+  }
   const signOut = () => {
     localStorage.removeItem('token')
     props.logOut()
@@ -14,11 +18,12 @@ const NavBar = (props) => {
   return (
     <div id='navbar'>
       <div id='banner-title'>
-        <p>TABULATOR</p>
+        <Link to='/'><p>TABULATOR</p></Link>
       </div>
       <div id='avatar-container'>
         <Dropdown trigger={trigger} pointing='top right' icon={null}>
           <Dropdown.Menu>
+            <Dropdown.Item icon='user circle' text='Profile' onClick={profile}/>
             <Dropdown.Item icon='sign-out' text='Sign Out' onClick={signOut}/>
           </Dropdown.Menu>
         </Dropdown>

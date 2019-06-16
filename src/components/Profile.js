@@ -10,17 +10,12 @@ class Profile extends Component {
   render() {
     return (
       <div className="page">
-        { this.props.currentComposition ?
-            this.props.history.push(`/composition/${this.props.currentComposition.id}`) :
-            <>
-              <NavBar history={this.props.history}/>
-              <div id='master-container'>
-                <TabDirections />
-                <TabContainer/>
-                <UserInfo/>
-              </div>
-            </>
-        }
+        <NavBar history={this.props.history}/>
+        <div id='master-container'>
+          <TabDirections />
+          <TabContainer/>
+          <UserInfo/>
+        </div>
       </div>
     );
   }
