@@ -108,13 +108,12 @@ a.homepage-link:hover {
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 46%;
+  height: 45%;
   width: 30%;
-  min-height: 325px;
+  min-height: 335px;
   min-width: 250px;
   transform: translate(-50%, -50%);
-  background-color: #c1c1c1;
-  opacity: 0.9;
+  background-color: rgba(193, 193, 193, 0.9);
   border-radius: 15px;
   box-shadow: 8px 8px 3px black;
 }
@@ -123,13 +122,12 @@ a.homepage-link:hover {
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 65%;
-  width: 30%;
-  min-height: 475px;
+  height: 69%;
+  width: 35%;
+  min-height: 565px;
   min-width: 250px;
   transform: translate(-50%, -50%);
-  background-color: #c1c1c1;
-  opacity: 0.9;
+  background-color: rgba(193, 193, 193, 0.9);
   border-radius: 15px;
   box-shadow: 8px 8px 3px black;
 }
@@ -141,43 +139,28 @@ a.homepage-link:hover {
 }
 
 .header {
-  font-size: 36pt;
-  margin-bottom: 15px;
-  margin-top: 10%;
+  font-size: 36pt !important;
+  margin-bottom: 15px !important;
+  margin-top: 5% !important;
 }
 
-label {
-  display: inline-block;
-  width: 10%;
-  text-align: right;
-  font-size: 12pt;
+.form-input {
+  width: 80% !important;
 }
 
-#username-input, #email-input, #password-input, #avatar-input, textarea {
-  width: 75%;
-  margin: 5px;
-  padding: 5px;
-}
-
-input[type=submit] {
+#submit-button {
   margin: 10px;
   padding: 10px 20px;
   font-size: 24px;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  outline: none;
   color: #fff;
-  background-color: #79c13a;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 8px #999;
+  background-color: #6f942f;
+  box-shadow: 0 5px 5px #000;
 }
 
-input[type=submit]:active {
-  background-color: #69a832;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
+#submit-button:active {
+  background-color: #6f942f;
+  box-shadow: 0 3px 5px #000;
+  transform: translateY(3px);
 }
 
 #create-header {
