@@ -17,7 +17,7 @@ const SignUp = (props) => {
   return (
     <div id='signup-card'>
       <div id='signup-inner-card'>
-        <h1 className='header'>Sign Up</h1>
+        <h1 className='head'>Sign Up</h1>
         {/* <form onSubmit={submitHandler}>
           <input
             id='username-input'

@@ -8,7 +8,7 @@ const Login = (props) => {
   return (
     <div id='login-card'>
       <div id='login-inner-card'>
-        <h1 className='header'>Login</h1>
+        <h1 className='head'>Login</h1>
         { /*<form onSubmit={props.submitHandler}>
           <input
             className={error === 'Invalid username or password' ? 'invalid' : ''}
