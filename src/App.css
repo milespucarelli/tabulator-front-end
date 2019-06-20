@@ -25,10 +25,19 @@
 }
 
 a {
-  color: white;
+  color: black;
 }
 
 a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+a.inverted {
+  color: white;
+}
+
+a.inverted:hover {
   color: white;
   text-decoration: underline;
 }
@@ -177,9 +186,13 @@ a.homepage-link:hover {
   background: #ff6060;
 }
 
-.error-text {
-  color: red;
-  margin: 5px;
+.form-message {
+  margin: 0 80px !important;
+  padding: 5px !important;
+}
+
+#link-caption {
+  margin-top: 15px !important;
 }
 
 #bio {

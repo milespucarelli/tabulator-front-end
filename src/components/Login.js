@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Message, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 
 const Login = (props) => {
   const {email, password, error} = props
+  console.log(error)
   return (
     <div id='login-card'>
       <div id='login-inner-card'>
@@ -29,31 +30,40 @@ const Login = (props) => {
           {error === 'Invalid username or password' && <p className='error-text'>{error}</p>}
           <input type='submit' />
         </form> */ }
-        <Form onSubmit={props.submitHandler}>
-          <Form.Field>
+        <Form onSubmit={props.submitHandler} error={error !== 'must log in'}>
+          <Form.Field error={error !== 'must log in'}>
             <input
               className='form-input'
               type='email'
               name='email'
               value={email}
               placeholder='Email...'
-              onChange={props.changeHandler}
-              error={error === 'Invalid username or password' ? true : undefined}/>
+              onChange={props.changeHandler}/>
           </Form.Field>
-          <Form.Field>
+          <Form.Field error={error !== 'must log in'}>
             <input
               className='form-input'
               type='password'
               name='password'
               value={password}
               placeholder='Password...'
-              onChange={props.changeHandler}
-              error={error === 'Invalid username or password' ? true : undefined}/>
+              onChange={props.changeHandler}/>
           </Form.Field>
+          <Message
+            className='form-message'
+            compact
+            hidden={error === 'must log in'}
+            error={error !== 'must log in'}
+            size='mini'
+            header={error}/>
           <Button id='submit-button' type='submit'>Submit</Button>
         </Form>
-        <p className='link-caption'>New to Tabulator?</p>
-        <p id='link' onClick={props.clickHandler}>Sign Up!</p>
+        <Message id='link-caption' className='form-message' compact size='mini'>
+          <Icon name='help' />
+          New to Tabulator? <a onClick={props.clickHandler}>Sign Up!</a>
+        </Message>
+        {/*<p className='link-caption'>New to Tabulator?</p>
+        <p id='link' onClick={props.clickHandler}>Sign Up!</p>*/}
       </div>
     </div>
   );
