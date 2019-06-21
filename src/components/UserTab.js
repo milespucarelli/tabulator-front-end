@@ -13,7 +13,7 @@ class UserTab extends Component {
     let {title, artist} = this.props.composition
     return (
       <div className='userTab' >
-        <h1 onClick={this.clickHandler}><a>{title}</a></h1>
+        <h1 onClick={this.clickHandler}><a className='invert'>{title}</a></h1>
         <h4>{artist}</h4>
       </div>
     );

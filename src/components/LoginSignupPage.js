@@ -68,7 +68,8 @@ class LoginSignupPage extends Component {
     } = this
 
     return (
-        <div id='background'>
+      <div id='background'>
+        <div className='overlay'>
           { this.props.user ?
             <Redirect to='/profile' /> :
             clicked ?
@@ -89,6 +90,7 @@ class LoginSignupPage extends Component {
               clickHandler={clickHandler}/>
           }
         </div>
+      </div>
     )
   }
 }

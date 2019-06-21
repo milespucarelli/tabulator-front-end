@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Form, Message, Icon } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 
 const SignUp = (props) => {
@@ -106,8 +106,12 @@ const SignUp = (props) => {
           </Form.Field>
           <Button id='submit-button' type='submit'>Submit</Button>
         </Form>
-        <p className='link-caption'>Already a user?</p>
-        <p id='link' onClick={clickHandler}>Log In!</p>
+        <Message id='link-caption' className='form-message' compact size='mini'>
+          <Icon name='help' />
+          Already a user? <a onClick={clickHandler}>Log In!</a>
+        </Message>
+        {/* <p className='link-caption'>Already a user?</p>
+        <p id='link' onClick={clickHandler}>Log In!</p> */}
       </div>
     </div>
   )

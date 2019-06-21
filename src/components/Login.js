@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Button, Form, Message, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css'
 
 const Login = (props) => {
   const {email, password, error} = props

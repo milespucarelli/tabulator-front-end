@@ -24,20 +24,26 @@
   color: #61dafb;
 }
 
+label {
+  color: white !important;
+}
+
 a {
   color: black;
 }
 
 a:hover {
+  cursor: pointer;
   color: black;
   text-decoration: underline;
 }
 
-a.inverted {
+a.invert {
   color: white;
 }
 
-a.inverted:hover {
+a.invert:hover {
+  cursor: pointer;
   color: white;
   text-decoration: underline;
 }
@@ -48,6 +54,7 @@ a.homepage-link {
 
 a.homepage-link:hover {
   /* color: #6ac62e; */
+  cursor: pointer;
   color: #6f942f;
   text-decoration: underline;
 }
@@ -157,6 +164,15 @@ a.homepage-link:hover {
   width: 80% !important;
 }
 
+.form-message {
+  margin: 0 80px !important;
+  padding: 5px !important;
+}
+
+#link-caption {
+  margin-top: 15px !important;
+}
+
 #submit-button {
   margin: 10px;
   padding: 10px 20px;
@@ -182,19 +198,6 @@ a.homepage-link:hover {
   font-family: "Gill Sans"
 }
 
-.invalid {
-  background: #ff6060;
-}
-
-.form-message {
-  margin: 0 80px !important;
-  padding: 5px !important;
-}
-
-#link-caption {
-  margin-top: 15px !important;
-}
-
 #bio {
   width: 75%;
 }
@@ -202,34 +205,6 @@ a.homepage-link:hover {
 .link-caption {
   font-size: 14px;
   margin: 3px;
-}
-
-#link {
-  display: inline-block;
-  margin: 5px;
-}
-
-#link:hover {
-  display: inline-block;
-  cursor: pointer;
-  background-color: #79c13a;
-  text-decoration: underline;
-}
-
-.username {
-  margin: 10px;
-}
-
-.user-avatar {
-  margin: 10px;
-  border-radius: 50%;
-  max-width: 100%;
-  box-shadow: 0px 3px 3px #000000;
-}
-
-.bio {
-  margin: 5px;
-  padding: 10px;
 }
 
 .page {
@@ -299,7 +274,7 @@ a.homepage-link:hover {
 #new-composition {
   display: inline-block;
   background-image: url('./assets/images/tweed.png');
-  height: 250px;
+  min-height: 250px;
   width: 60%;
   border-radius: 15px;
   margin-top: 30px;
@@ -312,10 +287,8 @@ a.homepage-link:hover {
   margin: 3%
 }
 
-#title-input, #artist-input {
-  width: 50%;
-  margin: 8px;
-  padding: 5px;
+#title-input {
+  margin-left: 6px;
 }
 
 #user-tabs {
@@ -350,6 +323,22 @@ a.homepage-link:hover {
   background-image: url('./assets/images/tweed.png');
   border-radius: 15px;
   box-shadow: 0px 4px 4px #333333;
+}
+
+.username {
+  margin: 10px;
+}
+
+.user-avatar {
+  margin: 10px;
+  border-radius: 50%;
+  max-width: 100%;
+  box-shadow: 0px 3px 3px #000000;
+}
+
+.bio {
+  margin: 5px;
+  padding: 10px;
 }
 
 #editor {
