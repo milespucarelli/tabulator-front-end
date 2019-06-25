@@ -25,7 +25,6 @@ class NewTab extends Component {
   submitHandler = (e) => {
     e.preventDefault()
     this.props.createComposition(this.state.title, this.state.artist, this.props.userInfo.id)
-    this.props.history.push(`/composition/${this.props.currentComposition.id}`)
   }
 
   render() {
