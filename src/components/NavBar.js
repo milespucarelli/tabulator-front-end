@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Dropdown, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { logOut } from '../actions/userActions'
-import 'semantic-ui-css/semantic.min.css';
 
 const NavBar = (props) => {
   const profile = () => {

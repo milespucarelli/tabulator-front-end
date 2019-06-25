@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Button, Form, Message, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import { withRouter } from 'react-router-dom'
+import { Button, Form } from 'semantic-ui-react'
 import { createComposition } from '../actions/compositionActions'
 import svg from '../assets/images/add.svg'
 
@@ -24,8 +24,8 @@ class NewTab extends Component {
 
   submitHandler = (e) => {
     e.preventDefault()
-    console.log(this.props)
     this.props.createComposition(this.state.title, this.state.artist, this.props.userInfo.id)
+    this.props.history.push(`/composition/${this.props.currentComposition.id}`)
   }
 
   render() {
@@ -91,11 +91,16 @@ class NewTab extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ userInfo: state.user.userInfo})
+const mapStateToProps = (state) => (
+  {
+    userInfo: state.user.userInfo,
+    currentComposition: state.composition.currentComposition
+  }
+)
 
 const mapDispatchToProps = (dispatch) => ({
   createComposition: (title, artist, id) => dispatch(createComposition(title, artist, id))
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewTab);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NewTab));

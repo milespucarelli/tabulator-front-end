@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Button, Form, Message, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
 
 const Login = (props) => {
   const {email, password, error} = props
@@ -60,7 +60,7 @@ const Login = (props) => {
         </Form>
         <Message id='link-caption' className='form-message' compact size='mini'>
           <Icon name='help' />
-          New to Tabulator? <a onClick={props.clickHandler}>Sign Up!</a>
+          New to <Link to='/'>Tabulator</Link>? <a onClick={props.clickHandler}> Sign Up!</a>
         </Message>
         {/*<p className='link-caption'>New to Tabulator?</p>
         <p id='link' onClick={props.clickHandler}>Sign Up!</p>*/}

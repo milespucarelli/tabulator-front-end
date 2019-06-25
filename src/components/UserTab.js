@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { setComposition } from '../actions/compositionActions'
+import { Item, Segment } from 'semantic-ui-react'
 
 class UserTab extends Component {
   clickHandler = () => {
@@ -12,10 +13,16 @@ class UserTab extends Component {
   render() {
     let {title, artist} = this.props.composition
     return (
-      <div className='userTab' >
-        <h1 onClick={this.clickHandler}><a className='invert'>{title}</a></h1>
-        <h4>{artist}</h4>
-      </div>
+      <Segment className='userTab'>
+        <Item>
+          <Item.Header
+            as='h1'
+            onClick={this.clickHandler}>
+              <a className='invert'>{title}</a>
+          </Item.Header>
+          <Item.Meta as='h3'>{artist}</Item.Meta>
+        </Item>
+      </Segment>
     );
   }
 }

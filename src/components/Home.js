@@ -14,7 +14,6 @@ import { Button,
   Responsive,
   Segment
 } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
 import tabText from '../assets/images/tab_text.jpg'
 import vextab from '../assets/images/vextab_sample.png'
 import miles from '../assets/images/headshot2_square.jpg'

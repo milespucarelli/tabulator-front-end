@@ -26,7 +26,9 @@ class SideBar extends Component {
       })
     })
     beats.forEach((beat, index) => {
-      this.midiSounds.playChordAt(this.midiSounds.contextTime() + 0.25 * index, 335, beat, 0.50)
+      if (!beat.includes(0)) {
+        this.midiSounds.playChordAt(this.midiSounds.contextTime() + 0.25 * index, 335, beat, 0.50)
+      }
     })
   }
 

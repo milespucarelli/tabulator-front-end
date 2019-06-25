@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Login from './Login';
 import SignUp from './SignUp';
-import '../styles/Login.css'
 
 class LoginSignupPage extends Component {
   state = {

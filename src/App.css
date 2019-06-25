@@ -260,6 +260,7 @@ a.homepage-link:hover {
 }
 
 #directions {
+  padding-top: 25px;
   grid-column: 1;
   height: 100%;
   width: 100%;
@@ -298,12 +299,13 @@ a.homepage-link:hover {
 }
 
 .userTab {
-  display: inline-block;
-  width: 60%;
-  background-image: url('./assets/images/tweed.png');
-  border-radius: 15px;
-  box-shadow: 0px 4px 4px #333333;
-  margin: 2%;
+  width: 45% !important;
+  min-width: 250px !important;
+  background-image: url('./assets/images/tweed.png') !important;
+  border-radius: 15px !important;
+  box-shadow: 0px 4px 4px #333333 !important;
+  margin: 4% auto !important;
+  padding: 3% !important;
 }
 
 #info-bar {
@@ -325,20 +327,21 @@ a.homepage-link:hover {
   box-shadow: 0px 4px 4px #333333;
 }
 
-.username {
-  margin: 10px;
-}
-
-.user-avatar {
-  margin: 10px;
+#user-avatar {
+  margin: 15px 0 10px 0;
   border-radius: 50%;
-  max-width: 100%;
   box-shadow: 0px 3px 3px #000000;
 }
 
+#username {
+  color: white;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
 .bio {
-  margin: 5px;
-  padding: 10px;
+  color: white !important;
+  padding: 0 5px !important;
 }
 
 #editor {

@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { Button, Form, Message, Icon } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css';
 
 const SignUp = (props) => {
   const {
@@ -108,7 +108,7 @@ const SignUp = (props) => {
         </Form>
         <Message id='link-caption' className='form-message' compact size='mini'>
           <Icon name='help' />
-          Already a user? <a onClick={clickHandler}>Log In!</a>
+          Already registered to <Link to='/'>Tabulator</Link>? <a onClick={clickHandler}> Log In!</a>
         </Message>
         {/* <p className='link-caption'>Already a user?</p>
         <p id='link' onClick={clickHandler}>Log In!</p> */}
