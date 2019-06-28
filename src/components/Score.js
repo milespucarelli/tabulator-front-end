@@ -102,30 +102,28 @@ class Score extends Component {
     this.tabNotes = this.createTabNotesFromState(this.props.tabNotes)
     this.staffNoteCoords = []
 
-    let x = 0, y = 40, w = 320
-
-    for (let i = 0; i < 9; i++) {
-      let staff = null
-      let tab = null
+    let x = 15, y = 0, w = 320
+    for (let i = 0; i < 8; i++) {
+      let staff = new Vex.Flow.Stave(x, y, w)
+      let tab = new Vex.Flow.TabStave(x, y + 80 , w)
       if (i % 3 === 0) {
-        staff = new Vex.Flow.Stave(x, y, w)
-          .addClef("treble")
-          .addTimeSignature("4/4")
-          .setContext(this.context)
-          .draw()
-        tab = new Vex.Flow.TabStave(x, y + 80 , w)
-          .addClef("tab")
-          .setContext(this.context)
-          .draw()
+        staff.addClef("treble").addTimeSignature("4/4")
+        tab.addClef("tab")
+        staff.setContext(this.context).draw()
+        tab.setContext(this.context).draw()
+        let brace = new Vex.Flow.StaveConnector(staff, tab).setType(4)
+        let lineRight = new Vex.Flow.StaveConnector(staff, tab).setType(0)
+        let lineLeft = new Vex.Flow.StaveConnector(staff, tab).setType(1)
+        brace.setContext(this.context).draw()
+        lineRight.setContext(this.context).draw()
+        lineLeft.setContext(this.context).draw()
         const startX = staff.getNoteStartX()
         tab.setNoteStartX(startX + 2)
       } else {
-        staff = new Vex.Flow.Stave(x, y, w)
-          .setContext(this.context)
-          .draw()
-        tab = new Vex.Flow.TabStave(x, y + 80 , w)
-          .setContext(this.context)
-          .draw()
+        staff.setContext(this.context).draw()
+        tab.setContext(this.context).draw()
+        let lineRight = new Vex.Flow.StaveConnector(staff, tab).setType(i === 7 ? 6 : 0)
+        lineRight.setContext(this.context).draw()
       }
       let noteIndex = i * 4
       let tabNotes = this.tabNotes.slice(noteIndex, noteIndex + 4)
@@ -143,7 +141,7 @@ class Score extends Component {
       })
       x += 320
       if ((i + 1) % 3 === 0) {
-        x = 0
+        x = 15
         y += 225
       }
     }
@@ -202,6 +200,7 @@ class Score extends Component {
   componentDidMount() {
     this.drawStaffAndTab()
     if (this.props.currentComposition) {
+      this.clearCanvas()
       this.props.loadNotes(this.props.currentComposition)
       this.drawStaffAndTab()
     } else {

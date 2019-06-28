@@ -260,7 +260,7 @@ a.homepage-link:hover {
 }
 
 #directions {
-  padding-top: 25px;
+  padding-top: 28px;
   grid-column: 1;
   height: 100%;
   width: 100%;
@@ -344,6 +344,23 @@ a.homepage-link:hover {
   padding: 0 5px !important;
 }
 
+
+#composition {
+  grid-row: 2;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 12fr;
+}
+
+#composition-banner {
+  grid-row: 1;
+  text-align: center;
+}
+
+#comp-banner-text {
+  margin-top: 20px;
+}
+
 #editor {
   grid-row: 2;
   height: 100%;
@@ -352,6 +369,7 @@ a.homepage-link:hover {
 }
 
 #sidebar {
+  padding-top: 40px;
   height: 100%;
   grid-column: 1;
 }

@@ -1,5 +1,13 @@
+import { push } from 'connected-react-router'
+
 const setupEmptyComposition = (composition) => ({ type: 'SETUP_EMPTY_COMPOSITION', payload: composition })
-export const setComposition = (composition) => ({ type: 'SET_COMPOSITION', payload: composition })
+export const setComposition = (currentComposition) => ({
+    type: 'SET_NOTES_AND_COMPOSITION', payload: {
+      currentComposition,
+      tabNotes: currentComposition.tabNotes,
+      staffNotes: currentComposition.staffNotes
+    }
+  })
 
 export const setNotes = (tabNotes, staffNotes, str, fret, beat) => {
   let string = ((str - 1) % 6) + 1
@@ -132,7 +140,10 @@ export const createComposition = (title, artist, user_id) => {
         })
     })
       .then(res => res.json())
-      .then(data => dispatch(setupEmptyComposition(data.composition)))
+      .then(data => {
+        dispatch(push(`/composition/${data.composition.id}`))
+        dispatch(setupEmptyComposition(data.composition))
+      })
       .catch(console.error)
   }
 }

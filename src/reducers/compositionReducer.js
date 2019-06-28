@@ -15,12 +15,12 @@ const compositionReducer = (state = initialState, action) => {
         staffNotes: action.payload.staffNotes
       }
     }
-    case 'SET_COMPOSITION': {
-      return {
-        ...state,
-        currentComposition: action.payload.currentComposition
-      }
-    }
+    // case 'SET_COMPOSITION': {
+    //   return {
+    //     ...state,
+    //     currentComposition: action.payload.currentComposition
+    //   }
+    // }
     case 'SET_NOTES_AND_COMPOSITION': {
       return {
         ...state,
