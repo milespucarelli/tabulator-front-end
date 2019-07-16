@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router'
 
 const setupEmptyComposition = (composition) => ({ type: 'SETUP_EMPTY_COMPOSITION', payload: composition })
+export const setTempo = (tempo) => ({type: 'SET_TEMPO', payload: tempo})
 export const setComposition = (currentComposition) => ({
     type: 'SET_NOTES_AND_COMPOSITION', payload: {
       currentComposition,
@@ -148,7 +149,7 @@ export const createComposition = (title, artist, user_id) => {
   }
 }
 
-export const saveNotes = (composition, tabNotes) => {
+export const saveNotes = (composition, tempo, tabNotes) => {
   return (dispatch) => {
     fetch(`http://localhost:3000/api/v1/compositions/${composition.id}`, {
       method: "PATCH",
@@ -160,6 +161,7 @@ export const saveNotes = (composition, tabNotes) => {
         {
           composition:
           {
+            tempo,
             tabNotes
           }
         })

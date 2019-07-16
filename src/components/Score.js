@@ -147,12 +147,12 @@ class Score extends Component {
     }
 
     this.tabStringCoords = [
-      {top: 165, bottom: 178},
-      {top: 178, bottom: 191},
-      {top: 191, bottom: 204},
-      {top: 204, bottom: 218},
-      {top: 218, bottom: 230},
-      {top: 230, bottom: 243}
+      {top: 125, bottom: 138},
+      {top: 138, bottom: 151},
+      {top: 151, bottom: 164},
+      {top: 164, bottom: 178},
+      {top: 178, bottom: 190},
+      {top: 190, bottom: 203}
     ]
 
     this.tabStringCoords = this.tabStringCoords.concat([...this.tabStringCoords].map(coord => (

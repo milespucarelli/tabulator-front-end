@@ -5,7 +5,6 @@ import { Button, Form, Message, Icon } from 'semantic-ui-react'
 
 const Login = (props) => {
   const {email, password, error} = props
-  console.log(error)
   return (
     <div id='login-card'>
       <div id='login-inner-card'>

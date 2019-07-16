@@ -1,6 +1,7 @@
 const initialState = {
   tabNotes: Array.apply(null, Array(36)).map(() => ({ positions:[{str: 0, fret: ''}], duration: 'qr' })),
   staffNotes: Array.apply(null, Array(36)).map(() => ({clef: "treble", keys: ["b/4"], duration: "qr" })),
+  tempo: 120,
   keySig: 'C',
   timeSig: '4/4',
   currentComposition: null
@@ -25,12 +26,16 @@ const compositionReducer = (state = initialState, action) => {
       return {
         ...state,
         currentComposition: action.payload.currentComposition,
+        tempo: action.payload.currentComposition.tempo,
         tabNotes: action.payload.tabNotes,
         staffNotes: action.payload.staffNotes
       }
     }
     case 'SETUP_EMPTY_COMPOSITION': {
       return { ...initialState, currentComposition: action.payload }
+    }
+    case 'SET_TEMPO': {
+      return { ...state, tempo: action.payload}
     }
     case 'SET_KEY_SIG': {
       return { ...state, keySig: action.payload }
