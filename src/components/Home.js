@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Vex from 'vexflow';
@@ -14,8 +15,8 @@ import { Button,
   Responsive,
   Segment
 } from 'semantic-ui-react'
+import Demo from './Demo'
 import tabText from '../assets/images/tab_text.jpg'
-import vextab from '../assets/images/vextab_sample.png'
 import miles from '../assets/images/headshot2_square.jpg'
 
 const getWidth = () => {
@@ -24,24 +25,11 @@ const getWidth = () => {
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
 }
 
-const HomepageHeading = () => (
-  <Container text>
-    <Header
-      id='homepage-title'
-      as='h1'
-      content='TABULATOR'
-      inverted
-    />
-    <Header
-      id='homepage-tagline'
-      as='h2'
-      content='A tabulature editor for the web'
-      inverted
-    />
-  </Container>
-)
+class Home extends Component {
+  state = {
+    clicked: false
+  }
 
-class DesktopContainer extends Component {
   loginClickHandler = () => {
     this.props.history.push('/login')
   }
@@ -50,63 +38,6 @@ class DesktopContainer extends Component {
     this.props.history.push('/signup')
   }
 
-  render() {
-    const { children } = this.props
-
-    return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-          <Segment
-            id='background'
-            inverted
-            textAlign='center'
-            style={{ minHeight: 500, padding: '1em 0em' }}
-            vertical
-          >
-          <div className='overlay'>
-            <Menu inverted size='large' style={{background: 'transparent'}}>
-              <Container>
-                <Menu.Item position='right'>
-                  <Link to='/login'>
-                    <Button as='a' inverted>
-                      Log in
-                    </Button>
-                  </Link>
-                  <Link to='/signup'>
-                    <Button as='a'inverted style={{ marginLeft: '0.5em' }}>
-                      Sign Up
-                    </Button>
-                  </Link>
-                </Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </div>
-          </Segment>
-        {children}
-      </Responsive>
-    )
-  }
-}
-
-DesktopContainer.propTypes = {
-  children: PropTypes.node,
-}
-
-const ResponsiveContainer = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-  </div>
-)
-
-ResponsiveContainer.propTypes = {
-  children: PropTypes.node,
-}
-
-
-class Home extends Component {
-  state = {
-    clicked: false
-  }
   clearCanvas = () => {
     this.context.svg.remove()
   }
@@ -153,26 +84,34 @@ class Home extends Component {
     ]
     this.staffNotes = this.makeStaffNotes(staffNoteArr)
     this.tabNotes = this.makeTabNotes(tabNoteArr)
-    let staff1 = new Vex.Flow.Stave(0, 0, 250)
+    let staff1 = new Vex.Flow.Stave(10, 0, 250)
         .addClef("treble")
         .addTimeSignature("4/4")
         .setContext(this.context)
         .draw()
-    let tab1 = new Vex.Flow.TabStave(0, 80, 250)
+    let tab1 = new Vex.Flow.TabStave(10, 80, 250)
         .addClef("tab")
         .setContext(this.context)
         .draw()
+    let brace = new Vex.Flow.StaveConnector(staff1, tab1).setType(4)
+    let lineRight = new Vex.Flow.StaveConnector(staff1, tab1).setType(0)
+    let lineLeft = new Vex.Flow.StaveConnector(staff1, tab1).setType(1)
+    brace.setContext(this.context).draw()
+    lineRight.setContext(this.context).draw()
+    lineLeft.setContext(this.context).draw()
     const startX = staff1.getNoteStartX()
     tab1.setNoteStartX(startX + 2)
     let tab1Notes = this.tabNotes.slice(0, 4)
     let staff1Notes = this.staffNotes.slice(0, 4)
 
-    let staff2 = new Vex.Flow.Stave(250, 0, 250)
+    let staff2 = new Vex.Flow.Stave(260, 0, 250)
       .setContext(this.context)
       .draw()
-    let tab2 = new Vex.Flow.TabStave(250, 80, 250)
+    let tab2 = new Vex.Flow.TabStave(260, 80, 250)
       .setContext(this.context)
       .draw()
+    let endLineRight = new Vex.Flow.StaveConnector(staff2, tab2).setType(6)
+    endLineRight.setContext(this.context).draw()
     let tab2Notes = this.tabNotes.slice(4, 8)
     let staff2Notes = this.staffNotes.slice(4, 8)
     Vex.Flow.Formatter.FormatAndDrawTab(this.context, tab1, staff1, tab1Notes, staff1Notes, true)
@@ -200,15 +139,6 @@ class Home extends Component {
     this.setState({clicked: !this.state.clicked})
   }
 
-  convertDuration = (duration) => {
-    switch (duration) {
-      case 'q':
-        return '4'
-      default:
-        return ''
-    }
-  }
-
   componentDidMount() {
     this.drawStaffAndTab()
     this.midiSounds.cacheInstrument(335);
@@ -223,7 +153,57 @@ class Home extends Component {
   // </Container>
   render() {
     return (
-      <ResponsiveContainer>
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+        <Segment
+          id='background'
+          inverted
+          textAlign='center'
+          style={{ minHeight: 500, padding: '1em 0em' }}
+          vertical>
+          <div className='overlay'>
+            <Menu inverted size='large' style={{background: 'transparent'}}>
+              { this.props.user ?
+                <Container>
+                  <Menu.Item position='right'>
+                    <Link to='/profile'>
+                      <Button as='a' inverted>
+                        Profile
+                      </Button>
+                    </Link>
+                  </Menu.Item>
+                </Container> :
+                <Container>
+                  <Menu.Item position='right'>
+                    <Link to='/login'>
+                      <Button as='a' inverted>
+                        Log in
+                      </Button>
+                    </Link>
+                    <Link to='/signup'>
+                      <Button as='a'inverted style={{ marginLeft: '0.5em' }}>
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </Menu.Item>
+                </Container>
+              }
+            </Menu>
+            <Container text>
+              <Header
+                id='homepage-title'
+                as='h1'
+                content='TABULATOR'
+                inverted
+              />
+              <Header
+                id='homepage-tagline'
+                as='h2'
+                content='A tabulature editor for the web'
+                inverted
+              />
+            </Container>
+          </div>
+        </Segment>
         <Segment style={{ padding: '5em 0em' }} vertical>
           <Grid container stackable verticalAlign='middle'>
             <Grid.Row>
@@ -288,7 +268,7 @@ class Home extends Component {
                 <Header as='h3' style={{ fontSize: '3.5em' }}>
                   Into this!
                 </Header>
-                <Image src={vextab} fluid style={{paddingLeft: '1.5em'}}/>
+                <Demo/>
               </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -415,9 +395,11 @@ class Home extends Component {
             </Grid>
           </Container>
         </Segment>
-      </ResponsiveContainer>
+      </Responsive>
     )
   }
 }
 
-export default Home;
+let mapStateToProps = (state) => ({user: state.user.userInfo})
+
+export default connect(mapStateToProps)(Home);
