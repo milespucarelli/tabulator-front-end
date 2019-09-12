@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Card } from 'semantic-ui-react'
-import {Image, Transformation, CloudinaryContext} from 'cloudinary-react'
+import {Image, Transformation} from 'cloudinary-react'
 
 
 const UserInfo = (props) => (
